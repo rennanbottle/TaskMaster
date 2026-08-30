@@ -1,4 +1,6 @@
-```TaskMaster_Projeto_Avaliativo/
+#Estrutura de Pastas
+```
+TaskMaster_Projeto_Avaliativo/
 ├── README.md                  # Documentação do projeto, enunciados e rubrica de avaliação
 ├── backend/                   # Módulo da API e Regras de Segurança
 │   ├── package.json           # Dependências do Node.js (express, bcryptjs, cors)
