@@ -1,4 +1,4 @@
-#Estrutura de Pastas
+# Estrutura de Pastas
 ```
 TaskMaster_Projeto_Avaliativo/
 ├── README.md                  # Documentação do projeto, enunciados e rubrica de avaliação
