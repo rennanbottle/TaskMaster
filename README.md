@@ -1,4 +1,4 @@
-TaskMaster_Projeto_Avaliativo/
+'''TaskMaster_Projeto_Avaliativo/
 ├── README.md                  # Documentação do projeto, enunciados e rubrica de avaliação
 ├── backend/                   # Módulo da API e Regras de Segurança
 │   ├── package.json           # Dependências do Node.js (express, bcryptjs, cors)
@@ -11,3 +11,4 @@ TaskMaster_Projeto_Avaliativo/
     ├── index.html               # Layout mobile em formato de aplicativo
     ├── style-mobile.css          # Estilização focada em telas de toque
     └── script-mobile.js           # Lógica e requisições focadas na experiência mobile
+'''
