@@ -1,3 +1,2 @@
 package.json.md
-node_modules/
-package-lock.json 
+backend/node_modules/
