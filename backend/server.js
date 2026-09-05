@@ -1,7 +1,9 @@
 // Código do servidor, rotas REST e criptografia
 const express = require('express');
 const cors = require('cors');
+const bcrypt = require('bcryptjs');
 const app = express();
+let sessoes = {};
 
 app.use(cors());
 app.use(express.json());
@@ -17,6 +19,8 @@ app.listen(PORT, () => {
 
 // O banco de dados em mémoria, uma lista de tarefas
 let tarefas = []; // Uma array vázia de começo
+let usuarios = [];
+let proximoUsuarioId = 1;
 let proximoId = 1;
 
 // GET /tasks -> devolve a lista inteira de tarefa em JSON
@@ -60,3 +64,55 @@ app.patch('/tasks/:id', (req, res) => {
   res.status(200).json(tarefa);
 });
 
+app.post('/auth/register', async (req, res) => {
+  const { nome, email, senha } = req.body; // Forma mais simples de pegar os campos do body em vez de digitar um por um, "req.body.nome, req.body.email e req.body.senha"
+
+  const senhaHash = await bcrypt.hash(senha, 10);
+
+  const novoUsuario = {
+    id: proximoUsuarioId++,
+    nome: nome,
+    email: email,
+    senhaHash: senhaHash
+  };
+
+  usuarios.push(novoUsuario)
+  
+  res.status(201).json({ mensagem: 'Usuário cadastrado com sucesso' });
+});
+
+app.post('/auth/login', async (req, res) => {
+  const { email, senha } = req.body;
+
+  const usuario = usuarios.find((usuario) => usuario.email === email);
+
+  if (!usuario) {
+    return res.status(401).json({ erro: 'Email ou senha incorretos' });
+  }
+
+  const senhaCorreta = await bcrypt.compare(senha, usuario.senhaHash);
+
+  if (!senhaCorreta) {
+    return res.status(401).json({ erro: 'Email ou senha incorretos' });
+  }
+
+  const token = crypto.randomUUID();
+  sessoes[token] = usuario.id
+
+  res.status(200).json({ token: token });
+});
+
+function verificarLogin(req, res, next) {
+  const token = req.headers.authorization?.split(' ')[1];
+
+  if (!token || !sessoes[token]) {
+    return res.status(401).json({ erro: 'Não autorizado' });
+  }
+
+  req.usuarioId = sessoes[token]; // guarda o id do usuário logado pra rota usar depois
+  next(); // libera a passagem
+}
+
+app.get('/tasks', verificarLogin, (req, res) => {
+
+})
