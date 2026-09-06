@@ -1,5 +1,195 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+  color: #222;
+}
+
+.escondido {
+  display: none;
+}
+
+.fade {
+  animation: aparecer 0.4s ease-in;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.tela {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
 }
+
+.caixa {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 30px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.caixa-tarefas {
+  max-width: 500px;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 22px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 16px;
+  color: #555;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: #444;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+button {
+  margin-top: 18px;
+  width: 100%;
+  padding: 10px;
+  background-color: #2d6cdf;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1f54b3;
+}
+
+button.secundario {
+  width: auto;
+  margin-top: 0;
+  background-color: #999;
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+button.secundario:hover {
+  background-color: #777;
+}
+
+.erro {
+  color: #c0392b;
+  font-size: 13px;
+  min-height: 18px;
+  margin-top: 8px;
+}
+
+.alternar {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 13px;
+}
+
+.alternar a {
+  color: #2d6cdf;
+  text-decoration: none;
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nova-tarefa {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.nova-tarefa input {
+  flex: 1;
+}
+
+.nova-tarefa button {
+  width: auto;
+  margin-top: 0;
+  padding: 10px 16px;
+}
+
+#listaTarefas {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-tarefa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  animation: aparecer 0.3s ease-in;
+}
+
+.item-tarefa .titulo-tarefa {
+  flex: 1;
+}
+
+.item-tarefa.concluida .titulo-tarefa {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.acoes-tarefa {
+  display: flex;
+  gap: 6px;
+}
+
+.acoes-tarefa button {
+  width: auto;
+  margin-top: 0;
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+.botao-concluir {
+  background-color: #27ae60;
+}
+
+.botao-concluir:hover {
+  background-color: #1e8449;
+}
+
+.botao-remover {
+  background-color: #c0392b;
+}
+
+.botao-remover:hover {
+  background-color: #922b21;
+}
+

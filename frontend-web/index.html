@@ -1,12 +1,495 @@
+Perfeito, dá sim pra fazer tudo pelo celular! Vou te guiar em partes: primeiro colar o código nos arquivos, depois rodar os dois servidores dentro do Codespace.
+
+## Parte 1 — Colar o código nos 3 arquivos
+
+No seu Codespace, abra o explorador de arquivos (ícone de pastas no canto), vá em `frontend-web/`, abra cada arquivo, selecione tudo que já tem lá dentro (toque e segure → "Selecionar tudo") e apague. Depois toque no botão de copiar de cada bloco abaixo e cole no lugar.
+
+**`frontend-web/index.html`** — toque em copiar e cole:
+
+```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Task Master</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Task Master</h1>
+
+  <section id="telaLogin" class="tela fade">
+    <div class="caixa">
+      <h1>Task Master</h1>
+
+      <form id="formLogin">
+        <h2>Entrar</h2>
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" required>
+
+        <label for="loginSenha">Senha</label>
+        <input type="password" id="loginSenha" required>
+
+        <button type="submit">Entrar</button>
+        <p id="erroLogin" class="erro"></p>
+      </form>
+
+      <form id="formCadastro" class="escondido">
+        <h2>Criar conta</h2>
+        <label for="cadastroNome">Nome</label>
+        <input type="text" id="cadastroNome" required>
+
+        <label for="cadastroEmail">Email</label>
+        <input type="email" id="cadastroEmail" required>
+
+        <label for="cadastroSenha">Senha</label>
+        <input type="password" id="cadastroSenha" required>
+
+        <button type="submit">Cadastrar</button>
+        <p id="erroCadastro" class="erro"></p>
+      </form>
+
+      <p class="alternar">
+        <a href="#" id="linkAlternar">Ainda não tem conta? Cadastre-se</a>
+      </p>
+    </div>
+  </section>
+
+  <section id="telaTarefas" class="tela fade escondido">
+    <div class="caixa caixa-tarefas">
+      <div class="cabecalho">
+        <h1>Minhas tarefas</h1>
+        <button id="botaoSair" class="secundario">Sair</button>
+      </div>
+
+      <div class="nova-tarefa">
+        <input type="text" id="inputNovaTarefa" placeholder="Digite uma tarefa nova...">
+        <button id="botaoAdicionar">Adicionar</button>
+      </div>
+
+      <ul id="listaTarefas"></ul>
+    </div>
+  </section>
+
   <script src="app.js"></script>
 </body>
 </html>
+```
+
+**`frontend-web/style.css`** — mesmo processo:
+
+```css
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+  color: #222;
+}
+
+.escondido {
+  display: none;
+}
+
+.fade {
+  animation: aparecer 0.4s ease-in;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.tela {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.caixa {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 30px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.caixa-tarefas {
+  max-width: 500px;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 22px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 16px;
+  color: #555;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: #444;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+button {
+  margin-top: 18px;
+  width: 100%;
+  padding: 10px;
+  background-color: #2d6cdf;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1f54b3;
+}
+
+button.secundario {
+  width: auto;
+  margin-top: 0;
+  background-color: #999;
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+button.secundario:hover {
+  background-color: #777;
+}
+
+.erro {
+  color: #c0392b;
+  font-size: 13px;
+  min-height: 18px;
+  margin-top: 8px;
+}
+
+.alternar {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 13px;
+}
+
+.alternar a {
+  color: #2d6cdf;
+  text-decoration: none;
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nova-tarefa {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.nova-tarefa input {
+  flex: 1;
+}
+
+.nova-tarefa button {
+  width: auto;
+  margin-top: 0;
+  padding: 10px 16px;
+}
+
+#listaTarefas {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-tarefa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  animation: aparecer 0.3s ease-in;
+}
+
+.item-tarefa .titulo-tarefa {
+  flex: 1;
+}
+
+.item-tarefa.concluida .titulo-tarefa {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.acoes-tarefa {
+  display: flex;
+  gap: 6px;
+}
+
+.acoes-tarefa button {
+  width: auto;
+  margin-top: 0;
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+.botao-concluir {
+  background-color: #27ae60;
+}
+
+.botao-concluir:hover {
+  background-color: #1e8449;
+}
+
+.botao-remover {
+  background-color: #c0392b;
+}
+
+.botao-remover:hover {
+  background-color: #922b21;
+}
+```
+
+**`frontend-web/app.js`** — mesmo processo (esse é o mais importante, o do login/token/tarefas):
+
+```javascript
+const API_URL = "http://localhost:3000"; // <- vamos trocar esse valor no Passo 3
+
+let tokenAtual = null;
+
+const telaLogin = document.getElementById("telaLogin");
+const telaTarefas = document.getElementById("telaTarefas");
+
+const formLogin = document.getElementById("formLogin");
+const formCadastro = document.getElementById("formCadastro");
+const linkAlternar = document.getElementById("linkAlternar");
+
+const erroLogin = document.getElementById("erroLogin");
+const erroCadastro = document.getElementById("erroCadastro");
+
+const inputNovaTarefa = document.getElementById("inputNovaTarefa");
+const botaoAdicionar = document.getElementById("botaoAdicionar");
+const listaTarefas = document.getElementById("listaTarefas");
+const botaoSair = document.getElementById("botaoSair");
+
+linkAlternar.addEventListener("click", function (evento) {
+  evento.preventDefault();
+  formCadastro.classList.toggle("escondido");
+  formLogin.classList.toggle("escondido");
+
+  if (formCadastro.classList.contains("escondido")) {
+    linkAlternar.textContent = "Ainda não tem conta? Cadastre-se";
+  } else {
+    linkAlternar.textContent = "Já tem conta? Entrar";
+  }
+});
+
+formCadastro.addEventListener("submit", function (evento) {
+  evento.preventDefault();
+
+  const nome = document.getElementById("cadastroNome").value;
+  const email = document.getElementById("cadastroEmail").value;
+  const senha = document.getElementById("cadastroSenha").value;
+
+  fetch(API_URL + "/auth/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nome: nome, email: email, senha: senha })
+  })
+    .then(function (resposta) {
+      if (!resposta.ok) throw new Error("Não foi possível cadastrar");
+      return resposta.json();
+    })
+    .then(function () {
+      erroCadastro.textContent = "";
+      formCadastro.classList.add("escondido");
+      formLogin.classList.remove("escondido");
+      linkAlternar.textContent = "Ainda não tem conta? Cadastre-se";
+      document.getElementById("loginEmail").value = email;
+    })
+    .catch(function (erro) {
+      erroCadastro.textContent = "Erro ao cadastrar. Tente outro email.";
+      console.error(erro);
+    });
+});
+
+formLogin.addEventListener("submit", function (evento) {
+  evento.preventDefault();
+
+  const email = document.getElementById("loginEmail").value;
+  const senha = document.getElementById("loginSenha").value;
+
+  fetch(API_URL + "/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: email, senha: senha })
+  })
+    .then(function (resposta) {
+      if (!resposta.ok) throw new Error("Email ou senha incorretos");
+      return resposta.json();
+    })
+    .then(function (dados) {
+      tokenAtual = dados.token;
+      erroLogin.textContent = "";
+      telaLogin.classList.add("escondido");
+      telaTarefas.classList.remove("escondido");
+      carregarTarefas();
+    })
+    .catch(function (erro) {
+      erroLogin.textContent = "Email ou senha incorretos.";
+      console.error(erro);
+    });
+});
+
+botaoSair.addEventListener("click", function () {
+  tokenAtual = null;
+  listaTarefas.innerHTML = "";
+  telaTarefas.classList.add("escondido");
+  telaLogin.classList.remove("escondido");
+});
+
+function carregarTarefas() {
+  fetch(API_URL + "/tasks", {
+    headers: { "Authorization": "Bearer " + tokenAtual }
+  })
+    .then(function (resposta) { return resposta.json(); })
+    .then(function (tarefas) { renderizarTarefas(tarefas); })
+    .catch(function (erro) { console.error("Erro ao carregar tarefas:", erro); });
+}
+
+function renderizarTarefas(tarefas) {
+  listaTarefas.innerHTML = "";
+
+  tarefas.forEach(function (tarefa) {
+    const item = document.createElement("li");
+    item.className = "item-tarefa" + (tarefa.concluida ? " concluida" : "");
+
+    const titulo = document.createElement("span");
+    titulo.className = "titulo-tarefa";
+    titulo.textContent = tarefa.titulo;
+
+    const acoes = document.createElement("div");
+    acoes.className = "acoes-tarefa";
+
+    const botaoConcluir = document.createElement("button");
+    botaoConcluir.textContent = "Concluir";
+    botaoConcluir.className = "botao-concluir";
+    botaoConcluir.addEventListener("click", function () {
+      concluirTarefa(tarefa.id);
+    });
+
+    const botaoRemover = document.createElement("button");
+    botaoRemover.textContent = "Remover";
+    botaoRemover.className = "botao-remover";
+    botaoRemover.addEventListener("click", function () {
+      removerTarefa(tarefa.id);
+    });
+
+    acoes.appendChild(botaoConcluir);
+    acoes.appendChild(botaoRemover);
+    item.appendChild(titulo);
+    item.appendChild(acoes);
+    listaTarefas.appendChild(item);
+  });
+}
+
+botaoAdicionar.addEventListener("click", function () {
+  const titulo = inputNovaTarefa.value.trim();
+  if (titulo === "") return;
+
+  fetch(API_URL + "/tasks", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + tokenAtual
+    },
+    body: JSON.stringify({ titulo: titulo })
+  })
+    .then(function (resposta) { return resposta.json(); })
+    .then(function () {
+      inputNovaTarefa.value = "";
+      carregarTarefas();
+    })
+    .catch(function (erro) { console.error("Erro ao adicionar tarefa:", erro); });
+});
+
+function concluirTarefa(id) {
+  fetch(API_URL + "/tasks/" + id, {
+    method: "PATCH",
+    headers: { "Authorization": "Bearer " + tokenAtual }
+  })
+    .then(function () { carregarTarefas(); })
+    .catch(function (erro) { console.error("Erro ao concluir tarefa:", erro); });
+}
+
+function removerTarefa(id) {
+  fetch(API_URL + "/tasks/" + id, {
+    method: "DELETE",
+    headers: { "Authorization": "Bearer " + tokenAtual }
+  })
+    .then(function () { carregarTarefas(); })
+    .catch(function (erro) { console.error("Erro ao remover tarefa:", erro); });
+}
+```
+
+## Parte 2 — Ligar o backend
+
+No Codespace tem um ícone de **Terminal** (geralmente no menu de "☰" ou uma abinha embaixo escrito "TERMINAL"). Abra um terminal e digite, linha por linha:
+
+```
+cd backend
+npm install
+node server.js
+```
+
+Vai aparecer `Servidor rodando na porta 3000`. **Deixe esse terminal aberto**, não feche.
+
+## Parte 3 — Descobrir o endereço do backend e ajustar o app.js
+
+Enquanto o backend está rodando, procure a aba **"PORTS"** (Portas) — geralmente fica do lado da aba "TERMINAL", embaixo. Vai ter uma linha com a porta `3000`. Toque nela e copie o **"Forwarded Address"** (um link tipo `https://algumnome-3000.app.github.dev`).
+
+Volte no `app.js` e troque a primeira linha:
+```javascript
+const API_URL = "http://localhost:3000";
+```
+por (colando o link que você copiou, **sem barra no final**):
+```javascript
+const API_URL = "https://algumnome-3000.app.github.dev";
+```
+
+## Parte 4 — Abrir a sua tela
+
+Abra um **segundo terminal** (tem um "+" do lado do terminal já aberto) e digite:
+
+```
+cd frontend-web
+python3 -m http.server 5500
+```
+
+Vá de novo na aba "PORTS", ache a porta `5500`, e toque no ícone de "abrir no navegador" (globo/mundo). Isso vai abrir a tela de login do seu projeto numa nova aba. Teste cadastrar, logar e criar uma tarefa.
+
+Me avisa em qual desses 4 passos você está, ou se der algum erro na tela/terminal — cola aqui o que aparecer que eu te ajudo a resolver.
