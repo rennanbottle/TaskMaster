@@ -72,7 +72,7 @@ app.patch('/tasks/:id', verificarLogin, (req, res) => {
 });
 
 app.post('/auth/register', async (req, res) => {
-  const { nome, email, senha } = req.body; // Forma mais simples de pegar os campos do body em vez de digitar um por um, "req.body.nome, req.body.email e req.body.senha"
+  const { nome, email, senha } = req.body; // Forma mais simples de pegar os campos do body em vez de digitar um por um, "req.body.nome, req.body.email e req.body.senha".
 
   const senhaHash = await bcrypt.hash(senha, 10);
 
