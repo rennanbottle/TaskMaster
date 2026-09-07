@@ -1,14 +1,17 @@
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
+const path = require('path');
 const app = express();
 let sessoes = {};
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '..', 'frontend-web')));
 
 app.get('/', (req, res) => {
-  res.send('API do Task Master rodando!');
+  res.sendFile(path.join(__dirname, '..', 'frontend-web', 'index.html'));
 });
 
 const PORT = 3000;
