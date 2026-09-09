@@ -9,6 +9,7 @@ let sessoes = {};
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'frontend-web')));
+app.use('/mobile', express.static(path.join(__dirname, '..', 'mobile'))); 
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'frontend-web', 'index.html'));
