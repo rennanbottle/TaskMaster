@@ -2,11 +2,76 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <!-- Isso aqui é o que faz o navegador respeitar a largura real da tela
+       do celular, em vez de tentar simular um monitor grande e diminuir tudo -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Task Master Mobile</title>
   <link rel="stylesheet" href="style-mobile.css">
 </head>
 <body>
+
   <h1>Task Master</h1>
+
+  <!-- ===================== TELA DE LOGIN ===================== -->
+  <section id="tela-login" class="tela">
+    <h2>Entrar</h2>
+    <form id="form-login">
+      <label for="login-email">E-mail</label>
+      <input type="email" id="login-email" required>
+
+      <label for="login-senha">Senha</label>
+      <input type="password" id="login-senha" required>
+
+      <button type="submit">Entrar</button>
+    </form>
+    <p class="troca-tela">
+      Não tem conta? <button type="button" id="btn-ir-cadastro" class="link">Cadastre-se</button>
+    </p>
+    <p id="login-erro" class="mensagem-erro"></p>
+  </section>
+
+  <!-- ===================== TELA DE CADASTRO ===================== -->
+  <section id="tela-cadastro" class="tela escondida">
+    <h2>Criar conta</h2>
+    <form id="form-cadastro">
+      <label for="cad-nome">Nome</label>
+      <input type="text" id="cad-nome" required>
+
+      <label for="cad-email">E-mail</label>
+      <input type="email" id="cad-email" required>
+
+      <label for="cad-senha">Senha</label>
+      <input type="password" id="cad-senha" required>
+
+      <button type="submit">Cadastrar</button>
+    </form>
+    <p class="troca-tela">
+      Já tem conta? <button type="button" id="btn-ir-login" class="link">Entrar</button>
+    </p>
+    <p id="cadastro-erro" class="mensagem-erro"></p>
+  </section>
+
+  <!-- ===================== TELA DE TAREFAS ===================== -->
+  <section id="tela-tarefas" class="tela escondida">
+    <div class="topo-tarefas">
+      <h2>Minhas tarefas</h2>
+      <button type="button" id="btn-sair" class="secundario">Sair</button>
+    </div>
+
+    <p id="aviso-demo" class="aviso-demo escondida">
+      Modo demonstração: usando dados de exemplo (backend/login ainda não conectados de verdade).
+    </p>
+
+    <form id="form-nova-tarefa">
+      <input type="text" id="input-nova-tarefa" placeholder="Nova tarefa..." required>
+      <button type="submit">Adicionar</button>
+    </form>
+
+    <!-- A lista de tarefas é montada por JavaScript (script-mobile.js),
+         cada <li> é criado dinamicamente ali -->
+    <ul id="lista-tarefas"></ul>
+  </section>
+
   <script src="script-mobile.js"></script>
 </body>
 </html>

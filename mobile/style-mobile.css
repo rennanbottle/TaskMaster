@@ -1,6 +1,182 @@
+/* ===================================================================
+   style-mobile.css
+   Estilização pensada para tela pequena e dedos, não mouse.
+   Comparado com um CSS "de site normal", aqui a gente aumenta:
+   - tamanho de fonte (mais fácil de ler sem dar zoom)
+   - altura dos botões e campos (mínimo 44px, área de toque confortável)
+   - espaço entre os elementos (evita apertar o botão errado)
+   =================================================================== */
+
+* {
+  box-sizing: border-box; /* padding não estoura a largura do elemento */
+}
+
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;              /* fonte maior que o padrão de site (normalmente 16px) */
+  max-width: 480px;              /* trava a largura: mesmo se abrir num monitor grande,
+                                     o layout continua "de celular" (coluna única) */
+  margin: 0 auto;
+  padding: 16px;
+  background-color: #f5f5f7;
+  color: #1c1c1e;
+}
+
+h1 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 24px;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+/* Toda tela (login, cadastro, tarefas) é um bloco que ocupa a largura toda,
+   empilhado — nunca lado a lado. É isso que quer dizer "layout em coluna única" */
+.tela {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.escondida {
+  display: none; /* usado pelo JS para trocar de tela sem recarregar a página */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: -4px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  height: 48px;           /* campo alto o bastante pro dedo tocar sem errar */
   font-size: 18px;
+  padding: 0 12px;
+  border: 1px solid #c7c7cc;
+  border-radius: 8px;
+}
+
+button {
+  height: 50px;            /* >= 44px: recomendação mínima de área de toque */
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background-color: #0a84ff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:active {
+  opacity: 0.8;            /* dá um feedback visual de "toquei aqui" */
+}
+
+button.secundario {
+  background-color: #e5e5ea;
+  color: #1c1c1e;
+  height: 44px;
+}
+
+button.link {
+  background: none;
+  color: #0a84ff;
+  height: auto;
+  padding: 4px;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+.troca-tela {
+  text-align: center;
+  font-size: 15px;
+}
+
+.mensagem-erro {
+  color: #ff3b30;
+  font-size: 14px;
+  min-height: 18px; /* reserva espaço pra não "pular" o layout quando o erro aparece */
+}
+
+.aviso-demo {
+  background-color: #fff4d6;
+  border: 1px solid #e6c766;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.topo-tarefas {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#form-nova-tarefa {
+  flex-direction: row; /* única exceção lado a lado: input + botão de adicionar */
+  gap: 8px;
+}
+
+#form-nova-tarefa input {
+  flex: 1;
+}
+
+#form-nova-tarefa button {
+  width: 90px;
+  height: 48px;
+}
+
+/* Lista de tarefas */
+#lista-tarefas {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#lista-tarefas li {
+  background-color: white;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;         /* toda a "linha" da tarefa é uma área de toque grande */
+}
+
+#lista-tarefas li.concluida span {
+  text-decoration: line-through;
+  color: #8e8e93;
+}
+
+#lista-tarefas li span {
+  flex: 1;
+  font-size: 17px;
+  word-break: break-word;
+}
+
+#lista-tarefas li button {
+  width: 44px;
+  height: 44px;
+  font-size: 18px;
+  padding: 0;
+}
+
+#lista-tarefas li button.concluir {
+  background-color: #34c759;
+}
+
+#lista-tarefas li button.remover {
+  background-color: #ff3b30;
 }
