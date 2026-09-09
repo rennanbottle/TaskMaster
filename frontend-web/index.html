@@ -2,11 +2,65 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Task Master</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Task Master</h1>
+
+  <section id="telaLogin" class="tela fade">
+    <div class="caixa">
+      <h1>Task Master</h1>
+
+      <form id="formLogin">
+        <h2>Entrar</h2>
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" required>
+
+        <label for="loginSenha">Senha</label>
+        <input type="password" id="loginSenha" required>
+
+        <button type="submit">Entrar</button>
+        <p id="erroLogin" class="erro"></p>
+      </form>
+
+      <form id="formCadastro" class="escondido">
+        <h2>Criar conta</h2>
+        <label for="cadastroNome">Nome</label>
+        <input type="text" id="cadastroNome" required>
+
+        <label for="cadastroEmail">Email</label>
+        <input type="email" id="cadastroEmail" required>
+
+        <label for="cadastroSenha">Senha</label>
+        <input type="password" id="cadastroSenha" required>
+
+        <button type="submit">Cadastrar</button>
+        <p id="erroCadastro" class="erro"></p>
+      </form>
+
+      <p class="alternar">
+        <a href="#" id="linkAlternar">Ainda não tem conta? Cadastre-se</a>
+      </p>
+    </div>
+  </section>
+
+  <section id="telaTarefas" class="tela fade escondido">
+    <div class="caixa caixa-tarefas">
+      <div class="cabecalho">
+        <h1>Minhas tarefas</h1>
+        <button id="botaoSair" class="secundario">Sair</button>
+      </div>
+
+      <div class="nova-tarefa">
+        <input type="text" id="inputNovaTarefa" placeholder="Digite uma tarefa nova...">
+        <button id="botaoAdicionar">Adicionar</button>
+      </div>
+
+      <ul id="listaTarefas"></ul>
+    </div>
+  </section>
+
   <script src="app.js"></script>
 </body>
 </html>
