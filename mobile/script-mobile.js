@@ -253,3 +253,4 @@ async function removerTarefa(id) {
     });
   }
   await carregarTarefas();
+}
