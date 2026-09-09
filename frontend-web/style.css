@@ -31,6 +31,10 @@ body {
   padding: 20px;
 }
 
+.tela.escondido {
+  display: none;
+}
+
 .caixa {
   background-color: #ffffff;
   border-radius: 10px;
@@ -192,4 +196,3 @@ button.secundario:hover {
 .botao-remover:hover {
   background-color: #922b21;
 }
-

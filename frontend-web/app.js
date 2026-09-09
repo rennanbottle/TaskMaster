@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000"; // <- vamos trocar esse valor no Passo 3
+const API_URL = window.location.origin;
 
 let tokenAtual = null;
 

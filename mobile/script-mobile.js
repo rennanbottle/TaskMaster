@@ -11,8 +11,9 @@ console.log('Task Master Mobile carregado');
 // ---------------------------------------------------------------------
 // CONFIGURAÇÃO
 // ---------------------------------------------------------------------
-// Endereço do backend (Rennan). Rodando local, é sempre essa porta.
-const URL_API = 'http://localhost:3000';
+// Endereço do backend. window.location.origin funciona tanto no Codespace
+// quanto quando o projeto estiver publicado (melhor que localhost fixo).
+const URL_API = window.location.origin;
 
 // MODO_DEMONSTRACAO = true  -> usa dados fictícios na memória do próprio
 //                              JavaScript, sem precisar do backend pronto.
